@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LinuxWare™ – THE Linux App Store">
+    <title>LinuxWare™ – THE Linux App Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+    <img src="linuxware.png" alt="LinuxWare Logo" class="logo">
+
+```
+<p class="motto">THE Linux App Store</p>
+
+<div class="controls">
+    <input
+        type="search"
+        id="search"
+        placeholder="🔎 Apps suchen..."
+        aria-label="Apps suchen"
+    >
+
+    <select id="category" aria-label="Kategorie auswählen">
+        <option value="all">Alle Kategorien</option>
+        <option value="linux">Linux</option>
+        <option value="game">Games</option>
+        <option value="tools">Tools</option>
+    </select>
+
+    <button id="reset" type="button">↻ Zurücksetzen</button>
+</div>
+```
+
+</header>
+
+<main>
+
+```
+<section class="cabinet" aria-label="LinuxWare Software-Sammlung">
+
+    <div class="shelf">
+
+        <article class="disc linux"
+            data-name="Linux Mint 22.3"
+            data-category="linux">
+            <div class="disc-cover">
+                <span>LINUX</span>
+                <strong>Mint 22.3</strong>
+            </div>
+            <h2>Linux Mint 22.3</h2>
+            <p>Linux Distribution</p>
+            <span class="format">.ISO</span>
+        </article>
+
+        <article class="disc linux"
+            data-name="Luanti"
+            data-category="linux">
+            <div class="disc-cover">
+                <span>OPEN</span>
+                <strong>Luanti</strong>
+            </div>
+            <h2>Luanti</h2>
+            <p>Open-Source Game Engine</p>
+            <span class="format">OPEN SOURCE</span>
+        </article>
+
+        <article class="disc linux"
+            data-name="Arch Linux"
+            data-category="linux">
+            <div class="disc-cover">
+                <span>ARCH</span>
+                <strong>Linux</strong>
+            </div>
+            <h2>Arch Linux</h2>
+            <p>Linux Distribution</p>
+            <span class="format">.ISO</span>
+        </article>
+
+        <article class="disc game"
+            data-name="Linux Games"
+            data-category="game">
+            <div class="disc-cover">
+                <span>LINUX</span>
+                <strong>GAMES</strong>
+            </div>
+            <h2>Linux Games</h2>
+            <p>Spiele für Linux</p>
+            <span class="format">GAMES</span>
+        </article>
+
+        <article class="disc tools"
+            data-name="Linux Tools"
+            data-category="tools">
+            <div class="disc-cover">
+                <span>LINUX</span>
+                <strong>TOOLS</strong>
+            </div>
+            <h2>Linux Tools</h2>
+            <p>Nützliche Programme</p>
+            <span class="format">TOOLS</span>
+        </article>
+
+        <article class="disc tools"
+            data-name="Shelly"
+            data-category="tools">
+            <div class="disc-cover">
+                <span>SHELLY</span>
+                <strong>INSTALLER</strong>
+            </div>
+            <h2>Shelly</h2>
+            <p>Multi-Format App Installer</p>
+            <span class="format">MULTI-FORMAT</span>
+        </article>
+
+    </div>
+
+</section>
+```
+
+</main>
+
+<footer>
+    <p>LinuxWare™ — THE Linux App Store</p>
+    <p>© 2026 LinuxWare</p>
+</footer>
+
+<script>
+    const search = document.getElementById("search");
+    const category = document.getElementById("category");
+    const reset = document.getElementById("reset");
+    const discs = document.querySelectorAll(".disc");
+
+    function filterApps() {
+        const searchText = search.value.toLowerCase().trim();
+        const selectedCategory = category.value;
+
+        discs.forEach(disc => {
+            const name = disc.dataset.name.toLowerCase();
+            const discCategory = disc.dataset.category;
+
+            const matchesSearch = name.includes(searchText);
+            const matchesCategory =
+                selectedCategory === "all" ||
+                discCategory === selectedCategory;
+
+            disc.style.display =
+                matchesSearch && matchesCategory ? "" : "none";
+        });
+    }
+
+    search.addEventListener("input", filterApps);
+    category.addEventListener("change", filterApps);
+
+    reset.addEventListener("click", () => {
+        search.value = "";
+        category.value = "all";
+        filterApps();
+    });
+</script>
+
+</body>
+</html>
